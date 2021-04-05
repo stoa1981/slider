@@ -151,7 +151,6 @@ names.set(38, "ARMINIA");
 names.set(6, "SCHALKE");
 
     const league = data.standings[0].table;
-    console.log(league);
     league.forEach((element) => {
       const logoUrl = element.team.crestUrl;
       const domLeague = document.querySelector(".third-slide");
@@ -179,8 +178,43 @@ fetch("http://api.football-data.org/v2/competitions/SA/standings", {
 })
   .then((res) => res.json())
   .then((data) => {
+    let names = new Map();
+    names.set(108, "INTER");
+    names.set(98, "MILAN");
+    names.set(102, "ATALANTA");
+    names.set(113, "NAPLES");
+    names.set(109, "JUVENTUS");
+    names.set(110, "LAZIO");
+    names.set(100, "ROME");
+    names.set(450, "VERONE");
+    names.set(471, "SASSUOLO");
+    names.set(584, "SAMPDORIA");
+    names.set(103, "BOLOGNE");
+    names.set(115, "UDINESE");
+    names.set(107, "GENOA");
+    names.set(99, "FIORENTINA");
+    names.set(1106, "BENEVENTO");
+    names.set(488, "SPEZIA");
+    names.set(586, "TORINO");
+    names.set(104, "CAGLIARI");
+    names.set(112, "PARME");
+    names.set(472, "CROTONE");
+
     const league = data.standings[0].table;
+    
     league.forEach((element) => {
+      const logoUrl = element.team.crestUrl;
+      const domLeague = document.querySelector(".fourth-slide");
+      const image = document.createElement("img");
+      image.setAttribute("src", logoUrl);
+      image.classList.add("image");
+      const teamContainer = document.createElement('article');
+      const teamName = document.createElement('p');
+      teamName.append(names.get(element.team.id));
+      teamContainer.append(image);
+      teamContainer.append(teamName);
+      teamContainer.classList.add('team-container')
+      domLeague.append(teamContainer);
       
     });
   })
@@ -196,14 +230,45 @@ fetch("http://api.football-data.org/v2/competitions/PL/standings", {
 })
   .then((res) => res.json())
   .then((data) => {
+    let names = new Map();
+    names.set(65, "M. CITY");
+    names.set(66, "MAN. UNITED");
+    names.set(338, "LEICESTER");
+    names.set(61, "CHELSEA");
+    names.set(73, "TOTTENHAM");
+    names.set(64, "LIVERPOOL");
+    names.set(563, "WEST HAM");
+    names.set(62, "EVERTON");
+    names.set(58, "ASTON VILLA");
+    names.set(57, "ARSENAL");
+    names.set(341, "LEEDS");
+    names.set(354, "CRYSTAL PALACE");
+    names.set(340, "SOUTHAMPTON");
+    names.set(76, "WOLVES");
+    names.set(328, "BURNLEY");
+    names.set(397, "BRIGHTON");
+    names.set(67, "NEWCASTLE");
+    names.set(63, "FULHAM");
+    names.set(74, "WBA");
+    names.set(356, "SHEFFIELD");
+
     const league = data.standings[0].table;
+    
     league.forEach((element) => {
+      console.log(`${element.team.id} ${element.team.name}`);
       const logoUrl = element.team.crestUrl;
       const domLeague = document.querySelector(".fifth-slide");
       const image = document.createElement("img");
       image.setAttribute("src", logoUrl);
       image.classList.add("image");
-      domLeague.append(image);
+      const teamContainer = document.createElement('article');
+      const teamName = document.createElement('p');
+      teamName.append(names.get(element.team.id));
+      teamContainer.append(image);
+      teamContainer.append(teamName);
+      teamContainer.classList.add('team-container')
+      domLeague.append(teamContainer);
+      
     });
   })
   .catch((err) => {
